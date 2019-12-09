@@ -36,7 +36,7 @@ addrouters.install = (Vue, { router, store }) => {
     });
   };
 
-  // 路由拦截器
+  // 路由拦截器;
   router.beforeEach((to, from, next) => {
     // 当前路由为登录界面则放行
     if (to.path === process.env.VUE_APP_BASE_LOGIN) {

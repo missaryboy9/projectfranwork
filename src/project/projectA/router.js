@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './page/Home.vue';
 
 Vue.use(Router);
 
@@ -18,8 +17,17 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
+      meta: { title: 'elementUi', icon: 'user' },
       component: () =>
-        import(/* webpackChunkName: "about" */ './page/About.vue')
+        import(/* webpackChunkName: "about" */ './layout/index.vue'),
+      children: [
+        {
+          path: 'index',
+          name: 'elementUi',
+          component: () => import('./page/About.vue'),
+          meta: { title: 'elementUi', icon: 'user' }
+        }
+      ]
     }
   ]
 });

@@ -4,21 +4,14 @@
       <filtertop />
     </div>
     <div>
-
       <div>
-        <happy-scroll>
-          <div style="width:85vw;height:70vh">
-            <filtermain />
-          </div>
-        </happy-scroll>
+        <filtermain />
       </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { HappyScroll } from 'vue-happy-scroll';
-import 'vue-happy-scroll/docs/happy-scroll.css';
 import {
   filtertop,
   filtermain
@@ -28,8 +21,7 @@ import {
 export default {
   components: {
     filtertop,
-    filtermain,
-    HappyScroll
+    filtermain
   },
   data() {
     return {

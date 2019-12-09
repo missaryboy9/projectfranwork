@@ -28,7 +28,6 @@ let potconfig = {
   publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
-  // pages: projectconfig.pages,
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {

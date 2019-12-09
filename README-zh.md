@@ -1,26 +1,10 @@
 # vue-admin-template
 
-> 这是一个极简的 vue admin 管理后台。它只包含了 Element UI & axios & iconfont & permission control & lint，这些搭建后台必要的东西。
+## standBy Z
 
-[线上地址](http://panjiachen.github.io/vue-admin-template)
+> 这是一个 vue admin 管理后台。它包含了 Element UI & axios & iconfont & permission control & vuex & vue-router & crypyo & gojs & echarts
 
-[国内访问](https://panjiachen.gitee.io/vue-admin-template)
-
-目前版本为 `v4.0+` 基于 `vue-cli` 进行构建，若你想使用旧版本，可以切换分支到[tag/3.11.0](https://github.com/PanJiaChen/vue-admin-template/tree/tag/3.11.0)，它不依赖 `vue-cli`。
-
-## Extra
-
-如果你想要根据用户角色来动态生成侧边栏和 router，你可以使用该分支[permission-control](https://github.com/PanJiaChen/vue-admin-template/tree/permission-control)
-
-## 相关项目
-
-- [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
-
-- [electron-vue-admin](https://github.com/PanJiaChen/electron-vue-admin)
-
-- [vue-typescript-admin-template](https://github.com/Armour/vue-typescript-admin-template)
-
-- [awesome-project](https://github.com/PanJiaChen/vue-element-admin/issues/2312)
+目前版本为 `v4.0+` 基于 `vue-cli` 进行构建，它不依赖 `vue-cli`。
 
 ## PROBLEM
 
@@ -31,7 +15,7 @@ npm install --global --production windows-build-tools
 
 安装后，npm 将自动执行此模块，该模块将下载并安装 Microsoft 免费提供的 Visual C ++ Build Tools 2017。需要这些工具来编译流行的本机模块。它还将安装 Python 2.7，适当配置您的计算机和 npm。
 
-### SELF FUNCTION
+### OwnMethod
 
 ## 请求使用:
 
@@ -61,3 +45,8 @@ vue-happy-scroll 是一款基于 vue2.0 的滚动条插件。
 它可以让你无需关心滚动条的兼容性问题，无需关心内容区域的宽高，当设定 resize 属性后，可以根据内容大小自动显示或隐藏滚动条。 这里有对各种丰富的额外功能进行说明。
 
 ## 本项目使用 Element-ui 版本为 2.12 参考手册时请核对
+
+## 本项目支持分项目打包 使用命令行交互
+
+运行命令 npm run wsdev/wsbuild 执行单项目运行/打包
+项目列表配置在 src/config/itemlist 下 项目名称必须按照 src/project/...的标准命名

@@ -99,10 +99,11 @@ export default {
 }
 .app-wrapper {
   @include clearfix;
-  position: relative;
+  position: fixed;
   height: 90vh;
   width: 100%;
-  margin-top: 6.5vh;
+  top: 6.5vh;
+  // margin-top: 6.5vh;
   opacity: 0;
   animation: showwrapper 1s forwards;
   &.mobile.openSidebar {

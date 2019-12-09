@@ -3,12 +3,11 @@
     <el-table
       :data="tableData"
       border
-      style="width: 100%"
+      :row-class-name="tableRowClassName"
+      height="70vh"
+      style="margin-bottom:10px"
+      stripe
     >
-      <el-table-column
-        type="selection"
-        width="40"
-      />
       <template v-for="item in tableclum">
         <el-table-column
           align="center"
@@ -21,6 +20,7 @@
         align="center"
         label="操作"
         class-name="tableclumstyles"
+        width="300px"
       >
         <template slot-scope="scope">
           <el-button
@@ -38,11 +38,34 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-row align="bottom">
+      <el-col :span="4">
+        共100条
+      </el-col>
+      <el-col
+        :span="6"
+        offset="12"
+      >
+        <el-pagination
+          background
+          :total="1000"
+          :current-page.sync="currentPage1"
+          :page-size="100"
+          layout=" prev, pager, next"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        />
+      </el-col>
+    </el-row>
   </div>
 </template>
-
+<style lang="scss">
+.el-table .rowclass > td {
+  padding: 4px;
+}
+</style>
 <script type="text/ecmascript-6">
-
+import tabledata from './tabledata';
 export default {
   components: {
 
@@ -52,61 +75,32 @@ export default {
       tableclum: [
         {
           prop: 'date',
-          label: '日期',
+          label: '类型',
           width: '130'
         },
         {
           prop: 'name',
-          label: '姓名',
+          label: '处理器类型',
           width: '180'
         },
         {
           prop: 'address',
-          label: '地址',
+          label: '业务bean名称',
+          width: ''
+        },
+        {
+          prop: 'businessName',
+          label: '业务bean标识',
           width: ''
         }
       ],
-      tableData: [{
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-08',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-06',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-07',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-07',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-07',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }]
+      tableData: tabledata
     };
   },
   methods: {
-
+    tableRowClassName() {
+      return 'rowclass';
+    }
   }
 };
 </script>
