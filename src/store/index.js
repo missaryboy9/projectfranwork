@@ -6,13 +6,10 @@ import settings from './modules/settings';
 import user from './modules/user';
 import setlogin from './modules/haslogin';
 import createPersistedState from 'vuex-persistedstate';
+import SecureLS from 'secure-ls';
+var ls = new SecureLS({ isCompression: false });
 
 Vue.use(Vuex);
-/**
- *   routerdata: [],
-  loginflag: false,
-  setrouter: []
- */
 const store = new Vuex.Store({
   modules: {
     app,
@@ -23,7 +20,12 @@ const store = new Vuex.Store({
   getters,
   plugins: [
     createPersistedState({
-      storage: window.sessionStorage,
+      // storage: window.sessionStorage,
+      storage: {
+        getItem: key => ls.get(key),
+        setItem: (key, value) => ls.set(key, value),
+        removeItem: key => ls.remove(key)
+      },
       reducer(val) {
         return {
           app: val.app,

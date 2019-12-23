@@ -77,7 +77,7 @@ module.exports = {
       2,
       2,
       {
-        SwitchCase: 1
+        SwitchCase: 2
       }
     ],
     "jsx-quotes": [2, "prefer-single"],
@@ -215,7 +215,7 @@ module.exports = {
     ],
     "padded-blocks": [2, "never"],
     quotes: [
-      2,
+      0,
       "single",
       {
         avoidEscape: true,
@@ -224,14 +224,14 @@ module.exports = {
     ],
     semi: [2, "always"],
     "semi-spacing": [
-      2,
+      1,
       {
         before: false,
         after: true
       }
     ],
     "space-before-blocks": [2, "always"],
-    "space-before-function-paren": [2, "never"],
+    "space-before-function-paren": [0, "ignore"],
     "space-in-parens": [2, "never"],
     "space-infix-ops": 2,
     "space-unary-ops": [
@@ -271,6 +271,6 @@ module.exports = {
         objectsInObjects: false
       }
     ],
-    "array-bracket-spacing": [2, "never"]
+    "array-bracket-spacing": [0, "never"]
   }
 };

@@ -150,7 +150,7 @@ import minix from './minix';
 import { tabledata } from './proxytable';
 import { getnews } from '@/common/api/getnews';
 export default {
-  mixins: [minix], // 少量的公共方法可在minix中共享
+  mixins: [ minix ], // 少量的公共方法可在minix中共享
   data() {
     return {
       formLabelWidth: '120px',
@@ -168,7 +168,7 @@ export default {
       multipleSelection: [],
       title: '动态路由测试页面',
       news: '',
-      tableData: [{
+      tableData: [ {
         date: '192.168.11.973',
         name: '8379',
         address: '停止'
@@ -180,12 +180,12 @@ export default {
         date: '192.168.11.973',
         name: '8379',
         address: '停止'
-      }],
+      } ],
       input: '',
-      options: [{
+      options: [ {
         value: '选项1',
         label: '文思海辉'
-      }],
+      } ],
       value: ''
     };
   },

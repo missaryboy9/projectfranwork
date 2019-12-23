@@ -33,21 +33,13 @@ import Layout from '@/layout';
 export const constantRoutes = [
   {
     path: '/',
+    hidden: true,
     component: Layout,
-    redirect: '/dashboardss',
-    children: [
-      {
-        path: 'dashboardss',
-        name: 'echartsTEST',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: 'echartsTEST', icon: 'user' }
-      }
-    ]
   },
   {
     path: '/render',
     component: Layout,
-    hidden: false,
+    hidden: true,
     children: [
       {
         path: 'rendertest',
@@ -70,6 +62,7 @@ export const constantRoutes = [
 
   {
     path: '/example',
+    hidden: true,
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
@@ -92,6 +85,7 @@ export const constantRoutes = [
 
   {
     path: '/form',
+    hidden: true,
     component: Layout,
     children: [
       {
@@ -104,6 +98,7 @@ export const constantRoutes = [
   },
   {
     path: '/elementUi',
+    hidden: true,
     component: Layout,
     children: [
       {
@@ -116,6 +111,7 @@ export const constantRoutes = [
   },
   {
     path: '/grid',
+    hidden: true,
     component: Layout,
     children: [
       {
@@ -131,6 +127,7 @@ export const constantRoutes = [
   },
   {
     path: '/nested',
+    hidden: true,
     component: Layout,
     redirect: '/nested/menu1',
     name: 'Nested',

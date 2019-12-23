@@ -355,9 +355,9 @@ export default {
     width: 100%;
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 0.1fr 1fr 2fr;
+    grid-template-columns: 1fr 2fr;
     grid-gap: 1px;
-    grid-template-areas: "lo dc us";
+    grid-template-areas: " dc us";
   }
   .scrrolbar {
     display: none;

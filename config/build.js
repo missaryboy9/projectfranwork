@@ -1,17 +1,17 @@
-let inquirer = require('inquirer');
+let inquirer = require("inquirer");
 let parameter = process.argv[2];
-let Handler = require('./project');
+let Handler = require("./project");
 let returnValueSet = {};
 let {
   confim: prompList,
   checkbox: singleItem,
   list: Multiitem
-} = require('./projectlist.js');
+} = require("./projectlist.js");
 inquirer
   .prompt(prompList)
   .then(answers => {
     returnValueSet = Object.assign(returnValueSet, answers);
-    return !returnValueSet['Bale'];
+    return !returnValueSet["Bale"];
   })
   .then(e => {
     switch (e) {
@@ -19,13 +19,13 @@ inquirer
         inquirer.prompt(Multiitem).then(e => {
           returnValueSet = Object.assign(returnValueSet, e);
           // console.log(returnValueSet);
-          Handler(returnValueSet['singleItem'], parameter);
+          Handler(returnValueSet["singleItem"], parameter);
         });
         break;
       case false:
         inquirer.prompt(singleItem).then(e => {
           returnValueSet = Object.assign(returnValueSet, e);
-          console.log('暂不支持多项目合并打包');
+          console.log("暂不支持多项目合并打包");
         });
         break;
     }

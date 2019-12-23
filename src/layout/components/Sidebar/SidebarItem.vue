@@ -20,12 +20,14 @@
               :title="onlyOneChild.meta.title"
             />
           </el-menu-item>
+
         </app-link>
       </template>
 
       <el-submenu
         v-else
         ref="subMenu"
+        class="elsubmenues"
         :index="resolvePath(item.path)"
         popper-append-to-body
       >
@@ -48,7 +50,13 @@
     </div>
   </div>
 </template>
-
+<style lang="scss">
+.elsubmenues {
+  :last-child {
+    color: #fff;
+  }
+}
+</style>
 <script>
 import path from 'path';
 import { isExternal } from '@/utils/validate';

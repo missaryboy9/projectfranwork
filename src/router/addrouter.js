@@ -14,7 +14,7 @@ addrouters.install = (Vue, { router, store }) => {
    * @Template '@/views/dashboard/index'
    */
 
-  let addrouter = e => {
+  let addrouter = (e, fun) => {
     store.dispatch('setlogin/GenerateRoutes', e).then(res => {
       console.log(res, 'resresresresresres');
       // 路由签名
@@ -24,6 +24,7 @@ addrouters.install = (Vue, { router, store }) => {
       // 分发路由表
       store.dispatch('setlogin/routerdata', routedada);
     });
+    fun && fun();
   };
 
   const Islogin = () => {
@@ -45,10 +46,12 @@ addrouters.install = (Vue, { router, store }) => {
       Islogin()
         .then(() => {
           if (from.name === null) {
-            addrouter(store.getters.setrouter);
+            addrouter(store.getters.setrouter, () => {
+              next();
+            });
+          } else {
             next();
           }
-          next();
         })
         .catch(() => {
           next({

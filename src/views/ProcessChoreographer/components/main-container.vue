@@ -14,6 +14,7 @@
           :prop="item.prop"
           :label="item.label"
           :width="item.width"
+          :show-overflow-tooltip="true"
         />
       </template>
       <el-table-column
@@ -26,15 +27,13 @@
           <el-button
             size="mini"
             type="primary"
-          >操作</el-button>
+            @click="edit"
+          >编辑</el-button>
           <el-button
             size="mini"
-            type="primary"
-          >操作</el-button>
-          <el-button
-            size="mini"
-            type="primary"
-          >操作</el-button>
+            type="danger"
+            @click="del"
+          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -44,11 +43,11 @@
       </el-col>
       <el-col
         :span="6"
-        offset="12"
+        :offset="12"
       >
         <el-pagination
           background
-          :total="1000"
+          :total="10000"
           :current-page.sync="currentPage1"
           :page-size="100"
           layout=" prev, pager, next"
@@ -57,6 +56,57 @@
         />
       </el-col>
     </el-row>
+    <div>
+      <el-dialog
+        title="修改应用"
+        :visible.sync="dialogVisible"
+        :before-close="handleClose"
+        :append-to-body="true"
+        custom-class="customwidth"
+      >
+        <el-form
+          ref="form"
+          :model="sizeForm"
+          label-width="auto"
+          size="mini"
+        >
+          <el-row class="showrow">
+            <el-col
+              :offset="1"
+              :span="20"
+            >
+              <el-form-item label="应用编号">
+                <el-input v-model="sizeForm.Numbering" />
+              </el-form-item>
+            </el-col>
+            <el-col
+              :offset="1"
+              :span="20"
+            >
+              <el-form-item label="应用名称">
+                <el-input
+                  v-model="sizeForm.name"
+                  type="textarea"
+                />
+              </el-form-item>
+            </el-col>
+            <el-col
+              :offset="12"
+              style="margin-top:20px"
+            >
+              <el-button
+                type="primary"
+                size="mini"
+              >保存</el-button>
+              <el-button
+                type="danger"
+                size="mini"
+              >退出</el-button>
+            </el-col>
+          </el-row>
+        </el-form>
+      </el-dialog>
+    </div>
   </div>
 </template>
 <style lang="scss">
@@ -68,20 +118,26 @@
 import tabledata from './tabledata';
 export default {
   components: {
-
   },
   data() {
     return {
+      sizeForm: {
+        Numbering: '',
+        name: ''
+      },
+      dialogVisible: false,
+      currentPage1: 1,
+      codestring: '',
       tableclum: [
         {
           prop: 'date',
           label: '类型',
-          width: '130'
+          width: '60'
         },
         {
           prop: 'name',
           label: '处理器类型',
-          width: '180'
+          width: '110'
         },
         {
           prop: 'address',
@@ -98,6 +154,17 @@ export default {
     };
   },
   methods: {
+    handleClose() {
+      this.dialogVisible = false;
+    },
+    handleSizeChange() {
+
+    },
+    handleCurrentChange() { },
+    edit() {
+      this.dialogVisible = true;
+    },
+    del() { },
     tableRowClassName() {
       return 'rowclass';
     }
@@ -105,11 +172,14 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
 .filtermain {
   padding: 10px;
 }
 .tableclumstyles {
   width: 1000px;
+}
+.customwidth {
+  width: 20rem;
 }
 </style>

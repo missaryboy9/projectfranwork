@@ -6,7 +6,7 @@
 import CryptoJS from 'crypto-js';
 import { JSEncrypt } from 'jsencrypt';
 const KP = {
-  key: 'http://wshh.com', // 秘钥 16:
+  key: 'https://www.pactera.com/', // 秘钥 16:
   iv: '1234567812345678', // 偏移量
   publicKey: `-----BEGIN PUBLIC KEY-----
                MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2cj17qO+3UX6DiJOJnmBS1tw5

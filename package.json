@@ -30,8 +30,11 @@
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",
+    "ptera_crack_gojs": "^1.0.1",
+    "secure-ls": "^1.2.5",
     "vue": "2.6.10",
     "vue-router": "3.0.6",
+    "vue2-verify": "^1.1.5",
     "vuex": "3.1.0",
     "vuex-persistedstate": "^2.7.0"
   },

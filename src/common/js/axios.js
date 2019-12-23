@@ -3,17 +3,17 @@
  * 包括 get、post、delete、put、download等方式
  *
  */
-import axios from 'axios';
+import axios from "axios";
 // import store from '@/vuex/store'
-import { base64, sign, rsaEn, aes, randomString } from './crypto';
-import { Message } from 'element-ui';
+import { base64, sign, rsaEn, aes, randomString } from "./crypto";
+import { Message } from "element-ui";
 // 后续vuex处理
 let store = {
   getters: {
-    serviceHost: '/api'
+    serviceHost: "/api"
   },
   state: {
-    token: ''
+    token: ""
   }
 };
 const ajax = axios.create({
@@ -29,9 +29,9 @@ const ajax = axios.create({
 ajax.interceptors.request.use(
   function(config) {
     // 在发送请求之前做某事
-    const ticket = sessionStorage.getItem('SUM-TICKET');
+    const ticket = sessionStorage.getItem("SUM-TICKET");
     if (ticket) {
-      config.headers['SUM-TICKET'] = ticket;
+      config.headers["SUM-TICKET"] = ticket;
     }
     return config;
   },
@@ -58,7 +58,7 @@ ajax.interceptors.response.use(
  * @param level  0:无，1：base64混淆，2: 签名（时间戳），3：签名（时间戳）加密RSA； 默认0
  */
 const get = (url, params, level) =>
-  ajax(getConfig(url, 'get', true, params, level))
+  ajax(getConfig(url, "get", true, params, level))
     .then(res => successback(res))
     .catch(error => errback(error));
 /**
@@ -68,7 +68,7 @@ const get = (url, params, level) =>
  * @param level  0:无，1：base64混淆，2: 签名（时间戳），3：签名（时间戳）加密RSA； 默认0
  */
 const postJson = (url, params, level) =>
-  ajax(getConfig(url, 'post', true, params, level))
+  ajax(getConfig(url, "post", true, params, level))
     .then(res => successback(res))
     .catch(error => errback(error));
 /**
@@ -78,7 +78,7 @@ const postJson = (url, params, level) =>
  * @param level  0:无，1：base64混淆，2: 签名（时间戳），3：签名（时间戳）加密RSA； 默认0
  */
 const post = (url, params, level) =>
-  ajax(getConfig(url, 'post', false, params, level))
+  ajax(getConfig(url, "post", false, params, level))
     .then(res => successback(res))
     .catch(error => errback(error));
 /**
@@ -88,7 +88,7 @@ const post = (url, params, level) =>
  * @param level  0:无，1：base64混淆，2: 签名（时间戳），3：签名（时间戳）加密RSA； 默认0
  */
 const del = (url, params, level) =>
-  ajax(getConfig(url, 'delete', true, params, level))
+  ajax(getConfig(url, "delete", true, params, level))
     .then(res => successback(res))
     .catch(error => errback(error));
 /**
@@ -98,7 +98,7 @@ const del = (url, params, level) =>
  * @param level  0:无，1：base64混淆，2: 签名（时间戳），3：签名（时间戳）加密RSA； 默认0
  */
 const putJson = (url, params, level) =>
-  ajax(getConfig(url, 'put', true, params, level))
+  ajax(getConfig(url, "put", true, params, level))
     .then(res => successback(res))
     .catch(error => errback(error));
 /**
@@ -108,7 +108,7 @@ const putJson = (url, params, level) =>
  * @param level  0:无，1：base64混淆，2: 签名（时间戳），3：签名（时间戳）加密RSA； 默认0
  */
 const put = (url, params, level) =>
-  ajax(getConfig(url, 'put', false, params, level))
+  ajax(getConfig(url, "put", false, params, level))
     .then(res => successback(res))
     .catch(error => errback(error));
 
@@ -120,34 +120,34 @@ const put = (url, params, level) =>
 const download = (url, params) => {
   return new Promise((resolve, reject) => {
     try {
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
+      const iframe = document.createElement("iframe");
+      iframe.style.display = "none";
       const ps = param2String(params);
-      if (url.indexOf('?') !== -1) {
-        url += '&' + ps;
+      if (url.indexOf("?") !== -1) {
+        url += "&" + ps;
       } else {
-        if (ps.indexOf('=') !== -1) {
-          url += '?' + ps;
+        if (ps.indexOf("=") !== -1) {
+          url += "?" + ps;
         }
       }
       iframe.onload = function() {
         // TODO 这下载不调用问题
         document.body.removeChild(iframe);
       };
-      if (url.indexOf('http') !== 0) {
+      if (url.indexOf("http") !== 0) {
         iframe.src = store.getters.serviceHost + url;
       } else {
         iframe.src = url;
       }
       setTimeout(() => {
-        resolve('ok');
+        resolve("ok");
       }, 1000);
-      window.addEventListener('message', function(error) {
+      window.addEventListener("message", function(error) {
         const res = JSON.parse(error.data);
         if (
           res &&
-          typeof res === 'object' &&
-          'code' in res &&
+          typeof res === "object" &&
+          "code" in res &&
           res.code !== 20000
         ) {
           reject(res);
@@ -156,7 +156,7 @@ const download = (url, params) => {
       document.body.appendChild(iframe);
     } catch (e) {
       reject({
-        data: 'error',
+        data: "error",
         code: -1
       });
     }
@@ -165,20 +165,20 @@ const download = (url, params) => {
 
 // 参数转换
 const param2String = data => {
-  if (typeof data === 'string') {
+  if (typeof data === "string") {
     return data;
   }
-  let ret = '';
+  let ret = "";
   for (const it in data) {
     let val = data[it];
     if (
-      typeof val === 'object' && //
+      typeof val === "object" && //
       (!(val instanceof Array) ||
-        (val.length > 0 && typeof val[0] === 'object'))
+        (val.length > 0 && typeof val[0] === "object"))
     ) {
       val = JSON.stringify(val);
     }
-    ret += it + '=' + encodeURIComponent(val) + '&';
+    ret += it + "=" + encodeURIComponent(val) + "&";
   }
   if (ret.length > 0) {
     ret = ret.substring(0, ret.length - 1);
@@ -188,19 +188,19 @@ const param2String = data => {
 
 // 错误回调函数
 const errback = error => {
-  if ('code' in error) {
+  if ("code" in error) {
     // 未登录
     if (error.code === 30001) {
       sessionStorage.clear();
-      window.location.href = '/';
+      window.location.href = "/";
       return;
     }
     return Promise.reject(error);
   }
   // 网络异常,或链接超时
   Message({
-    message: '网络异常了!',
-    type: 'error'
+    message: "网络异常了!",
+    type: "error"
   });
   return Promise.reject({
     data: error.message
@@ -209,20 +209,20 @@ const errback = error => {
 // 成功回调函数
 const successback = res => {
   if (res.status === 200 && res.data.code === 20001) {
-    const urls = res.data.data.split(',');
+    const urls = res.data.data.split(",");
     location.href = urls[1];
     return;
   }
   if (res.status === 200 && res.data.code !== 20000 && res.data.code) {
     const errMsg = {
-      '30002': '对不起无权限',
-      '30003': '验签失败'
+      "30002": "对不起无权限",
+      "30003": "验签失败"
     };
     const msg = errMsg[res.data.code];
     if (msg) {
       Message({
         message: errMsg[res.data.code],
-        type: 'error'
+        type: "error"
       });
     }
     return Promise.reject(res.data);
@@ -252,7 +252,7 @@ const getConfig = (url, method, isjson, params, level = 0) => {
     // params = {encrypt: base64.en(JSON.stringify(params))};
     const data_ = randomString(6) + base64.en(JSON.stringify(params));
     params = {};
-    params['cred'] = data_;
+    params["cred"] = data_;
     // config_.headers['encrypt'] = base64En(JSON.stringify(params));
   } else if (level === 2) {
     // 签名
@@ -261,7 +261,7 @@ const getConfig = (url, method, isjson, params, level = 0) => {
     // 获取token
     let token = store.state.token;
     if (!token) {
-      token = JSON.parse(sessionStorage.getItem('user')).token;
+      token = JSON.parse(sessionStorage.getItem("user")).token;
       store.state.token = token;
     }
     // 签名串
@@ -282,21 +282,21 @@ const getConfig = (url, method, isjson, params, level = 0) => {
     // 获取token
     let token = store.state.token;
     if (!token) {
-      token = JSON.parse(sessionStorage.getItem('user')).token;
+      token = JSON.parse(sessionStorage.getItem("user")).token;
       store.state.token = token;
     }
     // 4、签名：加密时间戳 + token + 加密串
     const signstr = sign(token, rsaPublicKey, encrypt);
     // 5、加密时间戳、加密串、签名放入head
-    config_.headers['encrypt'] = encrypt;
-    config_.headers['timestamp'] = rsaPublicKey;
-    config_.headers['signstr'] = signstr;
+    config_.headers["encrypt"] = encrypt;
+    config_.headers["timestamp"] = rsaPublicKey;
+    config_.headers["signstr"] = signstr;
     params = {};
   }
   // 表单提交参数
   if (!isjson) {
-    config_.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-    config_.responseType = 'text';
+    config_.headers["Content-Type"] = "application/x-www-form-urlencoded";
+    config_.responseType = "text";
     config_.transformRequest = [
       function(data) {
         return param2String(data);

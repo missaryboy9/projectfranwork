@@ -34,61 +34,102 @@
         class="icon-2d"
       >
     </div>
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form"
-      auto-complete="on" label-position="left">
+    <el-form
+      ref="loginForm"
+      :model="loginForm"
+      :rules="loginRules"
+      class="login-form"
+      auto-complete="on"
+      label-position="left"
+    >
       <div class="title-container">
         <h3 class="title">分布式后台管理系统</h3>
       </div>
 
       <el-form-item prop="username">
-        <el-input ref="username" v-model="loginForm.username" placeholder="你的用户名" name="username"
-          type="text" tabindex="1" auto-complete="on" />
+        <el-input
+          ref="username"
+          v-model="loginForm.username"
+          placeholder="你的用户名"
+          name="username"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+        />
       </el-form-item>
 
       <el-form-item prop="password">
-        <el-input :key="passwordType" ref="password" v-model="loginForm.password"
-          :type="passwordType" placeholder="请输入密码" name="password" tabindex="2" auto-complete="on"
-          @keyup.enter.native="handleLogin" />
+        <el-input
+          :key="passwordType"
+          ref="password"
+          v-model="loginForm.password"
+          :type="passwordType"
+          placeholder="请输入密码"
+          name="password"
+          tabindex="2"
+          auto-complete="on"
+          @keyup.enter.native="handleLogin"
+        />
       </el-form-item>
-
-      <el-button :loading="loading" class="el-button" @click.native.prevent="handleLogin">登录
+      <!-- <el-from-item>
+        <Verify
+          :type="5"
+          :img-size="versize"
+          :show-button="false"
+          @success="alert('success')"
+          @error="alert('error')"
+        />
+      </el-from-item> -->
+      <el-button
+        :loading="loading"
+        class="el-button"
+        @click.native.prevent="handleLogin"
+      >登录
       </el-button>
     </el-form>
   </div>
 </template>
 
 <script>
+// import Verify from 'vue2-verify';
 import { loginpath } from './logindata';
 import { validUsername } from '@/utils/validate';
 
 export default {
   name: 'Logins',
+  components: {
+    // Verify
+  },
   data() {
-    const validateUsername=(rule,value,callback) => {
-      if(!validUsername(value)) {
+    const validateUsername = (rule, value, callback) => {
+      if (!validUsername(value)) {
         callback(new Error('Please enter the correct user name'));
       } else {
         callback();
       }
     };
-    const validatePassword=(rule,value,callback) => {
-      if(value.length<6) {
+    const validatePassword = (rule, value, callback) => {
+      if (value.length < 6) {
         callback(new Error('The password can not be less than 6 digits'));
       } else {
         callback();
       }
     };
     return {
+      versize: {
+        height: '150px',
+        width: '200px'
+      },
       loginForm: {
         username: 'admin',
         password: '111111'
       },
       loginRules: {
         username: [
-          { required: true,trigger: 'blur',validator: validateUsername }
+          { required: true, trigger: 'blur', validator: validateUsername }
         ],
         password: [
-          { required: true,trigger: 'blur',validator: validatePassword }
+          { required: true, trigger: 'blur', validator: validatePassword }
         ]
       },
       loading: false,
@@ -98,18 +139,18 @@ export default {
   },
   watch: {
     $route: {
-      handler: function(route) {
-        this.redirect=route.query&&route.query.redirect;
+      handler: function (route) {
+        this.redirect = route.query && route.query.redirect;
       },
       immediate: true
     }
   },
   methods: {
     showPwd() {
-      if(this.passwordType==='password') {
-        this.passwordType='';
+      if (this.passwordType === 'password') {
+        this.passwordType = '';
       } else {
-        this.passwordType='password';
+        this.passwordType = 'password';
       }
       this.$nextTick(() => {
         this.$refs.password.focus();
@@ -117,20 +158,20 @@ export default {
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
-        if(valid) {
+        if (valid) {
           loginpath.then(res => {
+            this.$store.dispatch('setlogin/ansyrouterdata', true);
+            this.loading = true;
             this.$addrouter(res.data);
-            this.$store.dispatch('setlogin/ansyrouterdata',true);
-            this.loading=true;
-            this.$router.push({ path: '/sddd' });
+            this.$router.push({ path: '/applicationManagement/applicationManagement' });
           });
           this.$store
-            .dispatch('user/login',this.loginForm)
+            .dispatch('user/login', this.loginForm)
             .then(() => {
-              this.loading=false;
+              this.loading = false;
             })
             .catch(() => {
-              this.loading=false;
+              this.loading = false;
             });
         } else {
           console.log('error submit!!');

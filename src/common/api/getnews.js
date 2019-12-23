@@ -1,3 +1,3 @@
-import { post } from '../js/axios';
+import { post } from "../js/axios";
 
-exports.getnews = params => post('/toutiao/index', params);
+exports.getnews = params => post("/toutiao/index", params);

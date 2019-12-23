@@ -11,6 +11,9 @@
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title><%= webpackConfig.name %></title>
+  <% for (var css in htmlWebpackPlugin.files.css) { %>
+  <link href="<%=htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+  <% } %>
   <!-- <script src="../src/common/depend/go-debug1.js"></script> -->
 
 </head>
@@ -21,6 +24,9 @@
       to continue.</strong>
   </noscript>
   <div id="app"></div>
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+  <script type="text/javascript" src="<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+  <% } %>
   <!-- built files will be auto injected -->
 </body>
 

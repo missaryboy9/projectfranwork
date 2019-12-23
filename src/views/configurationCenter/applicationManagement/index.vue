@@ -1,31 +1,38 @@
 <template>
   <div class="applicationManagement">
-    <div>
-      <filtertop />
-    </div>
-    <div>
-      <div>
-        <filtermain />
-      </div>
+    <div
+      v-for="(item,key) in modulelist"
+      :key="key"
+    >
+      <component :is="item.name" />
     </div>
   </div>
 </template>
-
 <script type="text/ecmascript-6">
 import {
-  filtertop,
+  newapplication,
   filtermain
-
-} from './components';
+} from '../components';
 
 export default {
   components: {
-    filtertop,
+    newapplication,
     filtermain
   },
   data() {
     return {
-
+      modulelist: [
+        {
+          name: 'newapplication',
+          sendpropos: '',
+          getemit: ''
+        },
+        {
+          name: 'filtermain',
+          sendpropos: '',
+          getemit: ''
+        }
+      ]
     };
   }
 };

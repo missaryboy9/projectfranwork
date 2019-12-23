@@ -56,7 +56,17 @@ export default {
         return {
           path: '/' + e.template,
           src: 'Layout',
-          children: [
+          meta: e.meta,
+          children: e.data ? [
+            ...e.data.map(el => {
+              return {
+                path: el.template,
+                name: el.template,
+                src: el.src === 'Temporary' ? 'Temporary' : el.src,
+                meta: { title: el.name, icon: 'user' }
+              };
+            })
+          ] : [
             {
               path: e.template,
               name: e.template,
@@ -69,41 +79,6 @@ export default {
       this.$addrouter([...Assembly]);
     }
   }
-  //  render函数也并非都很方便 对于多层嵌套的类型使用template
-  // render(h, context) {
-  //   return h(
-  //     'ul',
-  //     [
-  //       this.listdata.map((e, i) => {
-  //         return h(
-  //           'li',
-  //           {
-  //             on: {
-  //               click: () => {
-  //                 alert(e.name);
-  //               }
-  //             }
-  //           },
-  //           [
-  //             h(
-  //               'p',
-  //               e.name
-  //             ),
-  //             h(
-  //               'i',
-  //               {
-  //                 class: ['el-icon-' + e.style],
-  //                 attrs: {
-  //                   style: 'color:' + e.color
-  //                 }
-  //               }
-  //             )
-  //           ]
-  //         );
-  //       })
-  //     ]
-  //   );
-  // }
 };
 </script>
 <style scoped lang="scss">

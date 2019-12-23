@@ -2,27 +2,38 @@ exports.loginpath = Promise.resolve({
   code: 20000,
   data: [
     {
-      path: '/sddd',
-      src: 'Layout',
-      redirect: '/sddd/addroutertest',
+      path: "/applicationManagement",
+      src: "Layout",
       children: [
         {
-          path: 'addroutertest',
-          name: 'addroutertest',
-          src: 'addroutertest',
-          meta: { title: 'addroutertest', icon: 'user', login: true }
+          path: "applicationManagement",
+          name: "应用管理",
+          src: "applicationManagement",
+          meta: { title: "应用管理", icon: "user" }
         }
       ]
     },
     {
-      path: '/Temporary',
-      src: 'Layout',
+      path: "/environmentalManagement",
+      src: "Layout",
       children: [
         {
-          path: 'Temporary1',
-          name: 'Temporary',
-          src: 'Temporary',
-          meta: { title: 'Temporary', icon: 's-ticket' }
+          path: "environmentalManagement",
+          name: "环境管理",
+          src: "environmentalManagement",
+          meta: { title: "环境管理", icon: "s-ticket" }
+        }
+      ]
+    },
+    {
+      path: "/configurationManagement",
+      src: "Layout",
+      children: [
+        {
+          path: "configurationManagement",
+          name: "配置管理",
+          src: "configurationManagement",
+          meta: { title: "配置管理", icon: "s-ticket" }
         }
       ]
     }
