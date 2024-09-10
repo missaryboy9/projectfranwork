@@ -29,7 +29,7 @@
     "jsencrypt": "^3.0.0-rc.1",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
-    "path-to-regexp": "2.4.0",
+    "path-to-regexp": "8.0.0",
     "ptera_crack_gojs": "^1.0.1",
     "secure-ls": "^1.2.5",
     "vue": "2.6.10",
